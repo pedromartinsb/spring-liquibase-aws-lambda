@@ -34,13 +34,21 @@ jobs:
     needs: build
 
     steps:
-      # Deploy para AWS Lambda
-      - name: Deploy to AWS Lambda
-        uses: aws-actions/aws-lambda-deploy@v1
+      # Checkout do código
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Configurar AWS CLI
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
         with:
-          function-name: LiquibaseLambdaHandler
-          zip-file: target/*.jar
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} # Entrar no GitHub e acessar Settings > Secrets and Variables > Actions > New Environment > Add environment variable
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # Entrar no GitHub e acessar Settings > Secrets and Variables > Actions > New Environment > Add environment variable
-          AWS_REGION: us-east-1
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }} # Entrar no GitHub e acessar Settings > Secrets and Variables > Actions > New Environment > Add environment variable
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # Entrar no GitHub e acessar Settings > Secrets and Variables > Actions > New Environment > Add environment variable
+          aws-region: us-east-1
+
+      # Fazer o deploy para AWS Lambda
+      - name: Deploy to AWS Lambda
+        run: |
+          aws lambda update-function-code \
+            --function-name LiquibaseLambdaHandler \
+            --zip-file fileb://target/demo-0.0.1-SNAPSHOT.jar
