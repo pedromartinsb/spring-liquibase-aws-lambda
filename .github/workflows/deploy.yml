@@ -41,6 +41,6 @@ jobs:
           function-name: LiquibaseLambdaHandler
           zip-file: target/*.jar
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} # Entrar no GitHub e acessar Settings > Secrets and Variables > Actions
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # Entrar no GitHub e acessar Settings > Secrets and Variables > Actions
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} # Entrar no GitHub e acessar Settings > Secrets and Variables > Actions > New Environment > Add environment variable
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # Entrar no GitHub e acessar Settings > Secrets and Variables > Actions > New Environment > Add environment variable
           AWS_REGION: us-east-1
