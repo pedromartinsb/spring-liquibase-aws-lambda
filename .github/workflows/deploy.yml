@@ -51,7 +51,7 @@ jobs:
             aws lambda create-function \
               --function-name $FUNCTION_NAME \
               --runtime java17 \
-              --role arn:aws:iam::293268282747:role/LambdaExecutionRole \
+              --role arn:aws:iam::<SEU_USUARIO_IAM>:role/LambdaExecutionRole \
               --handler com.example.demo.LiquibaseLambdaHandler \
               --zip-file fileb://target/liquibase-demo-1.0.0.jar \
               --timeout 15 \
