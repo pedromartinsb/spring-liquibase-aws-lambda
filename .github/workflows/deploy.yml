@@ -58,19 +58,11 @@ jobs:
               --memory-size 512
           fi
 
-      # Criar e verificar o payload
-      - name: Create and Verify Payload
-        run: |
-          echo '{"input": "Test Execution"}' > payload.json
-          echo "Payload contents:"
-          cat payload.json
-
       # Executar a função Lambda
       - name: Execute AWS Lambda
         run: |
           aws lambda invoke \
             --function-name LiquibaseLambdaHandler \
-            --cli-binary-format raw-in-base64-out \
             output.json
 
       # Exibir a saída da execução
