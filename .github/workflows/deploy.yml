@@ -39,21 +39,21 @@ jobs:
 
       # Fazer o deploy para AWS Lambda
       - name: Create or Update Function
-          run: |
-            FUNCTION_NAME=LiquibaseLambdaHandler
-            if aws lambda get-function --function-name $FUNCTION_NAME; then
-              echo "Updating function $FUNCTION_NAME"
-              aws lambda update-function-code \
-                --function-name $FUNCTION_NAME \
-                --zip-file fileb://target/liquibase-demo-1.0.0.jar
-            else
-              echo "Creating function $FUNCTION_NAME"
-              aws lambda create-function \
-                --function-name $FUNCTION_NAME \
-                --runtime java17 \
-                --role <ROLE_ARN> \
-                --handler com.example.LiquibaseLambdaHandler \
-                --zip-file fileb://target/liquibase-demo-1.0.0.jar \
-                --timeout 15 \
-                --memory-size 512
-            fi
+        run: |
+          FUNCTION_NAME=LiquibaseLambdaHandler
+          if aws lambda get-function --function-name $FUNCTION_NAME; then
+            echo "Updating function $FUNCTION_NAME"
+            aws lambda update-function-code \
+              --function-name $FUNCTION_NAME \
+              --zip-file fileb://target/liquibase-demo-1.0.0.jar
+          else
+            echo "Creating function $FUNCTION_NAME"
+            aws lambda create-function \
+              --function-name $FUNCTION_NAME \
+              --runtime java17 \
+              --role arn:aws:iam::293268282747:user/pedro-dev \
+              --handler com.example.LiquibaseLambdaHandler \
+              --zip-file fileb://target/liquibase-demo-1.0.0.jar \
+              --timeout 15 \
+              --memory-size 512
+          fi
