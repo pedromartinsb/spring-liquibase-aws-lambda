@@ -61,7 +61,7 @@ jobs:
       # Executar a função Lambda
       - name: Execute AWS Lambda
         run: |
-          echo '{"input": "Test Execution"}' > payload.json
+          printf '{"input": "Test Execution"}' > payload.json
           aws lambda invoke \
             --function-name LiquibaseLambdaHandler \
             --payload file://payload.json \
