@@ -57,3 +57,15 @@ jobs:
               --timeout 15 \
               --memory-size 512
           fi
+
+      # Executar a função Lambda
+      - name: Execute AWS Lambda
+        run: |
+          aws lambda invoke \
+            --function-name LiquibaseLambdaHandler \
+            --payload '{"input": "Test Execution"}' \
+            output.json
+
+      # Exibir a saída da execução
+      - name: Show Lambda Execution Output
+        run: cat output.json
